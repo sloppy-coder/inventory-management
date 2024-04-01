@@ -12,6 +12,7 @@ export default function InventoryDashboard() {
         <div className=" flex items-center justify-between p-2 gap-2">
           <div>
             <SalesCard
+              key="1"
               qty="0"
               colour="text-blue-500"
               unit="Qty"
@@ -20,6 +21,7 @@ export default function InventoryDashboard() {
             />
           </div>
           <SalesCard
+            key="2"
             qty="0"
             colour="text-red-500"
             unit="Pkgs"
@@ -27,6 +29,7 @@ export default function InventoryDashboard() {
             icon={<Truck className="w-3 h-3" />}
           />
           <SalesCard
+            key="3"
             qty="0"
             colour="text-green-500"
             unit="Pkgs"
@@ -34,6 +37,7 @@ export default function InventoryDashboard() {
             icon={<CircleEllipsis className="w-3 h-3" />}
           />
           <SalesCard
+            key="4"
             qty="0"
             colour="text-yellow-500"
             unit="Qty"

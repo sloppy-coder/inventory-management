@@ -1,6 +1,8 @@
 import {
   BadgeIndianRupee,
+  ChevronDown,
   ChevronLeft,
+  ChevronUp,
   Files,
   Home,
   MessageSquareWarning,
@@ -10,29 +12,44 @@ import {
   Workflow,
 } from "lucide-react";
 import React, { useState } from "react";
-
 export default function Sidebar() {
-  const [homeButton, setHomeButton] = useState(false);
-  const [itemsButton, setItemsButton] = useState(false);
+  const [homeButton, setHomeButton] = useState(true);
+  const [inventoryItemsButton, setInventoryItemsButton] = useState(false);
   const [salesButton, setSalesButton] = useState(false);
   const [purchaseButton, setPurchaseButton] = useState(false);
   const [integrationsButton, setIntegrationsButton] = useState(false);
   const [reportsButton, setReportsButton] = useState(false);
   const [documentsButton, setDocumentsButton] = useState(false);
+  const [collapseItemsButton, setCollapseItemsButton] = useState(false);
+  const [innerItems, setInnerItems] = useState();
+  const [innerItemsGroups, setInnerItemsGroups] = useState();
+  const [innerAdjustments, setInnerAdjustments] = useState();
   const handleClick = (event) => {
-    setHomeButton(false);
-    setItemsButton(false);
-    setSalesButton(false);
-    setPurchaseButton(false);
-    setIntegrationsButton(false);
-    setReportsButton(false);
-    setDocumentsButton(false);
+    if (event !== "items") {
+      setHomeButton(false);
+      setSalesButton(false);
+      setPurchaseButton(false);
+      setIntegrationsButton(false);
+      setReportsButton(false);
+      setDocumentsButton(false);
+      setInnerItems(false);
+      setInnerItemsGroups(false);
+      setInnerAdjustments(false);
+      setInventoryItemsButton(false);
+    }
     switch (event) {
       case "home":
         setHomeButton(true);
         break;
       case "items":
-        setItemsButton(true);
+        setCollapseItemsButton(!collapseItemsButton);
+        if (collapseItemsButton) {
+          setInventoryItemsButton(
+            innerAdjustments || innerItems || innerItemsGroups
+          );
+        } else {
+          setInventoryItemsButton(false);
+        }
         break;
       case "sales":
         setSalesButton(true);
@@ -45,6 +62,15 @@ export default function Sidebar() {
         break;
       case "reports":
         setReportsButton(true);
+        break;
+      case "inner-items":
+        setInnerItems(true);
+        break;
+      case "inner-adjustments":
+        setInnerAdjustments(true);
+        break;
+      case "inner-itemgroups":
+        setInnerItemsGroups(true);
         break;
       default:
         setDocumentsButton(true);
@@ -70,17 +96,60 @@ export default function Sidebar() {
           <span>Home</span>
         </button>
 
-        <button
-          className={`flex space-x-0.5 p-2 ${
-            itemsButton
-              ? " bg-blue-600 border rounded-md"
-              : " hover:bg-slate-600"
-          }`}
-          onClick={() => handleClick("items")}
-        >
-          <ShoppingBag />
-          <span>Items</span>
-        </button>
+        <div className="flex flex-col">
+          <button
+            className={`flex space-x-0.5 p-2 ${
+              inventoryItemsButton
+                ? " bg-blue-600 border rounded-md"
+                : " hover:bg-slate-600"
+            }`}
+            onClick={() => handleClick("items")}
+          >
+            <ShoppingBag />
+            <span>Inventory Items</span>
+            {collapseItemsButton ? <ChevronUp /> : <ChevronDown />}
+          </button>
+          {collapseItemsButton && (
+            <div className=" flex flex-col items-start gap-3 py-3 px-5">
+              <button
+                className={` w-32 p-2 flex items-center ${
+                  innerItems
+                    ? " bg-blue-600 border rounded-md"
+                    : " hover:bg-slate-600"
+                }`}
+                onClick={() => {
+                  handleClick("inner-items");
+                }}
+              >
+                <span>Items</span>
+              </button>
+              <button
+                className={`p-2 w-32 flex items-center ${
+                  innerItemsGroups
+                    ? " bg-blue-600 border rounded-md"
+                    : " hover:bg-slate-600"
+                }`}
+                onClick={() => {
+                  handleClick("inner-itemgroups");
+                }}
+              >
+                <span>Item Groups</span>
+              </button>
+              <button
+                className={`p-2 w-32 flex items-center ${
+                  innerAdjustments
+                    ? " bg-blue-600 border rounded-md"
+                    : " hover:bg-slate-600"
+                }`}
+                onClick={() => {
+                  handleClick("inner-adjustments");
+                }}
+              >
+                <span>Adjustments</span>
+              </button>
+            </div>
+          )}
+        </div>
         <button
           className={`flex space-x-0.5 p-2 ${
             salesButton
