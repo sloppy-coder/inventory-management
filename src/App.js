@@ -5,6 +5,7 @@ import Items from "./(after-login)/inverntory/ineventory-items/items/items.jsx";
 import { Header } from "./components/header.jsx";
 import Sidebar from "./components/sidebar.jsx";
 import { ContextProvider } from "./Context.jsx";
+import ItemGroup from "./(after-login)/inverntory/ineventory-items/item-groups/itemGroup.jsx";
 function App() {
   return (
     <ContextProvider>
@@ -21,6 +22,7 @@ function App() {
                     <div className="w-full">
                       <Routes>
                         <Route path="/items" element={<Items />} />
+                        <Route path="/item-groups" element={<ItemGroup />} />
                         <Route path="/" element={<Home />} />
                       </Routes>
                     </div>

@@ -75,6 +75,7 @@ export default function Sidebar() {
         break;
       case "inner-itemgroups":
         setInnerItemsGroups(true);
+        navigate("/item-groups");
         break;
       default:
         setDocumentsButton(true);
