@@ -12,7 +12,9 @@ import {
   Workflow,
 } from "lucide-react";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export default function Sidebar() {
+  const navigate = useNavigate();
   const [homeButton, setHomeButton] = useState(true);
   const [inventoryItemsButton, setInventoryItemsButton] = useState(false);
   const [salesButton, setSalesButton] = useState(false);
@@ -40,6 +42,7 @@ export default function Sidebar() {
     switch (event) {
       case "home":
         setHomeButton(true);
+        navigate("/");
         break;
       case "items":
         setCollapseItemsButton(!collapseItemsButton);
@@ -65,6 +68,7 @@ export default function Sidebar() {
         break;
       case "inner-items":
         setInnerItems(true);
+        navigate("/items");
         break;
       case "inner-adjustments":
         setInnerAdjustments(true);
