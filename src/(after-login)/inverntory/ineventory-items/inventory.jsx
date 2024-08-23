@@ -1,6 +1,6 @@
 import React from "react";
-import { Header } from "../../components/header";
-import Sidebar from "../../components/sidebar";
+import { Header } from "../../../components/header";
+import Sidebar from "../../../components/sidebar";
 function Inventory({component}) {
   return (
     <div className="flex">
