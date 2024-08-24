@@ -6,26 +6,22 @@ const AppContext = createContext();
 export const useApp = () => useContext(AppContext);
 
 export const ContextProvider = ({ children }) => {
-  const defaultData=[];
-  for (let i = 1; i <= 3; i++) {
-    defaultData.push({
-      key: i,
-      Name: "John Brown",
-      Type: Number(`${i}2`),
-      Quantity: `New York No. ${i} Lake Park`,
-      Price: Number(`${i}`),
-      description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
-    });
-  }
-  const [ItemData, setItemData]= useLocalStorage("ItemData",defaultData);
-  const [ItemGroups, setItemGroups]= useLocalStorage("ItemGroups", []);
+  const defaultData = [];
+  const [ItemData, setItemData] = useLocalStorage("ItemData", defaultData);
+  const [ItemGroups, setItemGroups] = useLocalStorage("ItemGroups", []);
+  const [currentTab, setCurrentTab] = useLocalStorage("currentTab", "home");
+  const [collapseItemsButton, setCollapseItemsButton] = useLocalStorage(false);
   return (
     <AppContext.Provider
       value={{
+        currentTab,
+        setCurrentTab,
         ItemData,
         setItemData,
         ItemGroups,
         setItemGroups,
+        collapseItemsButton,
+        setCollapseItemsButton,
       }}
     >
       {children}
