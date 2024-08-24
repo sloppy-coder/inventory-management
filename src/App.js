@@ -21,8 +21,15 @@ function App() {
                     <Header />
                     <div className="w-full">
                       <Routes>
-                        <Route path="/items" element={<Items />} />
-                        <Route path="/item-groups" element={<ItemGroup />} />
+                        <Route
+                          path="/inventory-items/items"
+                          element={<Items />}
+                        />
+                        <Route
+                          path="/inventory-items/item-groups"
+                          element={<ItemGroup />}
+                        />
+                        <Route path="/home" element={<Home />} />
                         <Route path="/" element={<Home />} />
                       </Routes>
                     </div>

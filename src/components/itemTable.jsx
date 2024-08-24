@@ -1,7 +1,8 @@
 import React from "react";
 import { Table } from "antd";
+import ItemDetailCard from "./itemDetailCard";
 const defaultExpandable = {
-  expandedRowRender: (record) => <p>{record.description}</p>,
+  expandedRowRender: (record) => <ItemDetailCard record={record} key={record.key}/>,
 };
 const ItemTable = ({ tableData }) => {
   const columns = [
